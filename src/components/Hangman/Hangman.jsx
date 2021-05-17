@@ -14,6 +14,13 @@ export default class Hangman extends React.Component {
             guess: new Set([])
         }
     }
+    handleGuess = (e) => {
+        let letter = e.target.value;
+        this.setState({
+            guess: this.state.guess.add(letter),
+            mistakes: this.state.mistakes + (this.state.answer.includes(letter) ? 0 : 1)
+        });
+    }
     // Reveal the character if it was guessed correctly.
     guessedLetter = () => {
         return this.state.answer.split("")
@@ -26,7 +33,7 @@ export default class Hangman extends React.Component {
         let alphabet = [...Array(26).keys()].map(i => String.fromCharCode(i + 97));
         console.log(alphabet);
         return alphabet.map(letter => 
-            <button key={letter} value={letter}>{letter}</button>
+            <button key={letter} value={letter} onClick={this.handleGuess}>{letter}</button>
         )
     }
     render() {
@@ -37,9 +44,9 @@ export default class Hangman extends React.Component {
                 <article id="hangman-container">
                     <h1 id="hangman-title">The Hangman</h1>
                     <p>Guess the word!</p>
+                    <p>{this.state.answer}</p>
                     <p>{gameOver ? `Correct word: ${this.state.answer}` : this.guessedLetter()}</p>
                     <p>{keyboard}</p>
-                    {/* <p>{this.state.answer}</p> */}
                 </article>
             </div>
         )
