@@ -1,0 +1,32 @@
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+svg path, svg circle {
+	stroke: #000;
+	stroke-width: 0.25;
+	stroke-linecap: round;
+	fill: none;
+}
+#wrapper {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+	background-color: #2d2d2d;
+    min-height: 100vh;
+}
+#hangman-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: column;
+	background-color: #fff;
+	width: 70%;
+	height: 70%;
+	min-height: 40em;
+	border-radius: 30px;
+}
+#hangman-title {
+	margin: 3em;
+}
