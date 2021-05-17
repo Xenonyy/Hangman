@@ -163,7 +163,7 @@ export default class Hangman extends React.Component {
                     <p id="mistakes">Number of <b>wrong</b> guesses: {this.state.mistakes} (out of {this.props.maxMistakes})</p>
                     <div id="button-container">
                         <button className="game-btn" onClick={this.endGame}>End Game</button>
-                        <button className="game-btn" onClick={this.resetGame}>Start New Game</button>
+                        <button className="game-btn" id ="new-game-btn" onClick={this.resetGame}>Start New Game</button>
                     </div>
                 </article>
             </div>
