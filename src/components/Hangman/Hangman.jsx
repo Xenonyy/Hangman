@@ -10,7 +10,7 @@ export default class Hangman extends React.Component {
         super(props);
         this.state = {
             mistakes: 0,
-            answer: word(),
+            answer: word.getRandom(),
             guess: new Set([])
         }
     }
@@ -43,8 +43,13 @@ export default class Hangman extends React.Component {
         this.setState({
             mistakes: 0,
             guess: new Set([]),
-            answer: word()
+            answer: word.getRandom()
         })
+    }
+    generateWordLength = () => {
+        let length = [...Array(7).keys()];
+        return length.map(i =>
+            <button key={i}>{word.getMinLenght + i}</button>)
     }
     render() {
         // Calculate the outcome of the game and display the state accordingly.
@@ -60,8 +65,18 @@ export default class Hangman extends React.Component {
 
         return(
             <div id="wrapper">
-                <article id="hangman-container">
-                    <h1 id="hangman-title">The Hangman</h1>
+                <article className="hangman-container">
+                    <h1 className="hangman-title">The Hangman</h1>
+                    <div id="new-game-container">
+                        <p>Let's play <b>Hangman!</b></p>
+                        <p>How many letters do you want in your word?</p>
+                    </div>
+                    <div id="word-select-container">
+                        <p>{this.generateWordLength()}</p>
+                    </div>
+                </article>
+                <article className="hangman-container hide">
+                    <h1 className="hangman-title">The Hangman</h1>
                     <p>{result}</p>
                     {/* <p>{this.state.answer}</p> */}
                     <p>{gameOver ? `Correct word: ${this.state.answer}` : this.guessedLetter()}</p>
