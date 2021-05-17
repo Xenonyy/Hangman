@@ -2,6 +2,7 @@ import React from 'react';
 import './Hangman.css'
 import word from '../Words/Words';
 import arrow from '../Images/right-arrow.png';
+import Header from '../Header/Header';
 
 export default class Hangman extends React.Component {
     static defaultProps = {
@@ -102,6 +103,7 @@ export default class Hangman extends React.Component {
         
         return(
             <div id="wrapper">
+                <Header/>
                 <section id="instructions" >
                     Instructions
                     <img src={arrow} alt="Arrow" id="right-arrow" onClick={this.showInstructions}/>

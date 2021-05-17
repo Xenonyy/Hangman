@@ -15,6 +15,10 @@ svg path, svg circle {
     flex-flow: column;
 	background-color: #2d2d2d;
     min-height: 100vh;
+	background-image: url(../Images/logo.png);
+	background-size: 28em;
+    background-repeat: no-repeat;
+    background-position: left -10% bottom -15%;
 }
 .hangman-container {
     display: flex;
@@ -117,7 +121,7 @@ button {
     justify-content: center;
     align-items: center;
     flex-flow: wrap;
-    width: 80%;
+    width: 60%;
 	text-align: center;
 }
 #instruction-title {
