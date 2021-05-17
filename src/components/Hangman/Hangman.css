@@ -38,7 +38,7 @@ button {
     height: 3em;
 	color: black;
     border-radius: 2px;
-    text-transform: capitalize;
+    text-transform: uppercase;
     background-color: #fff;
     filter: drop-shadow(0px 0px 2px grey);
 }
@@ -75,4 +75,14 @@ button {
 	width: 25%;
     margin: 5em;
     transform: scale(1.4);
+}
+#play-btn {
+	background-color: black;
+	color: #fff;
+	position: absolute;
+    width: 70%;
+    margin: 3em;
+    border-radius: 10px;
+    border: none;
+	font-size: .8rem;
 }
