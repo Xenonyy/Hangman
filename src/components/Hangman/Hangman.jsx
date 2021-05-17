@@ -36,6 +36,16 @@ export default class Hangman extends React.Component {
             <button key={letter} value={letter} onClick={this.handleGuess} disabled={this.state.guess.has(letter)}>{letter}</button>
         )
     }
+    endGame = () => {
+        // TODO...
+    }
+    resetGame = () => {
+        this.setState({
+            mistakes: 0,
+            guess: new Set([]),
+            answer: word()
+        })
+    }
     render() {
         // Calculate the outcome of the game and display the state accordingly.
         const correctAnswer = this.guessedLetter().join("") === this.state.answer;
@@ -57,6 +67,10 @@ export default class Hangman extends React.Component {
                     <p>{gameOver ? `Correct word: ${this.state.answer}` : this.guessedLetter()}</p>
                     <p id="keyboard-text">Play with a word</p>
                     <p id = "keyboard">{this.generateKeyboard()}</p>
+                    <div id="button-container">
+                        <button className="game-btn" onClick={this.endGame}>END GAME</button>
+                        <button className="game-btn" onClick={this.resetGame}>START NEW GAME</button>
+                    </div>
                 </article>
             </div>
         )
