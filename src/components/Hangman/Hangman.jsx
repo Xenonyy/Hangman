@@ -16,6 +16,7 @@ export default class Hangman extends React.Component {
             guess: new Set([])
         }
     }
+    // Handle the correctness of the guess and update state accordingly.
     handleGuess = (e) => {
         let letter = e.target.value;
         this.setState({
@@ -24,20 +25,23 @@ export default class Hangman extends React.Component {
         });
     }
     // Reveal the character if it was guessed correctly.
-    guessedLetter = () => {
-        return this.state.answer.split("")
-            .map(letter => 
-                this.state.guess.has(letter) ? letter : " _ "
-            );
-    }
+    guessedLetter = () => this.state.answer.split("").map(letter => this.state.guess.has(letter) ? letter : " _ ");
+
     // Create a button for each letter of the English alphabet. Disable buttons which have had been clicked.
     generateKeyboard = () => {
         let alphabet = [...Array(26).keys()].map(i => String.fromCharCode(i + 97));
-        console.log(alphabet);
+        // console.log(alphabet);
         return alphabet.map(letter => 
-            <button key={letter} value={letter} onClick={this.handleGuess} disabled={this.state.guess.has(letter)}>{letter}</button>
+            <button 
+            key={letter} 
+            value={letter} 
+            onClick={this.handleGuess} 
+            disabled={this.state.guess.has(letter)}
+            >{letter}</button>
         )
     }
+
+    // Reset the game and go back to the starting page.
     endGame = () => {
         this.setState({
             mistakes: 0,
@@ -47,6 +51,8 @@ export default class Hangman extends React.Component {
         document.querySelector("#hangman-game").classList.add("hide");
         document.querySelector("#hangman-newgame").classList.remove("hide");
     }
+
+    // Reset the game with a random word.
     resetGame = () => {
         this.setState({
             mistakes: 0,
@@ -54,6 +60,7 @@ export default class Hangman extends React.Component {
             answer: word.getRandom()
         })
     }
+    // Make the user able to select the length of the word and update state.
     handleWordLength = (e) => {
         let length = e.target.value;
         console.log(length, this.state.answer.length)
@@ -68,23 +75,36 @@ export default class Hangman extends React.Component {
         this.setState({
             answer: findRandom()
         });
-        console.log(this.state.answer)
+        // console.log(this.state.answer)
     }
+
+    // Generate the buttons based on the min and max length of the words array.
     generateWordLength = () => {
         let length = [...Array(7).keys()];
         return length.map(i =>
-            <button key={word.getMinLenght + i} value={word.getMinLenght + i} id={`btn-${i}`} onClick={this.handleWordLength}>{word.getMinLenght + i}</button>
+            <button 
+            key={word.getMinLenght + i} 
+            value={word.getMinLenght + i} 
+            id={`btn-${i}`} 
+            onClick={this.handleWordLength}
+            >{word.getMinLenght + i}</button>
         )
     }
+
+    // Hide the starting page and show the game.
     startGame = () => {
         document.querySelector("#hangman-game").classList.toggle("hide");
         document.querySelector("#hangman-newgame").classList.toggle("hide");
     }
+
+    // Hide the starting and game pages and show the instructions.
     showInstructions = () => {
         document.querySelector("#hangman-game").classList.add("hide");
         document.querySelector("#hangman-newgame").classList.add("hide");
         document.querySelector("#hangman-instructions").classList.remove("hide");
     }
+
+    //Hide the instructions and show the game page.
     hideInstructions = () => {
         document.querySelector("#hangman-game").classList.remove("hide");
         document.querySelector("#hangman-newgame").classList.remove("hide");
@@ -137,7 +157,6 @@ export default class Hangman extends React.Component {
                 <article className="hangman-container hide" id="hangman-game">
                     <h1 className="hangman-title">The Hangman</h1>
                     <p style={{WebkitTextStrokeWidth:"medium"}}>{result}</p>
-                    {/* <p>{this.state.answer}</p> */}
                     <p>{gameOver ? `Correct word: ${this.state.answer}` : this.guessedLetter()}</p>
                     <p id="keyboard-text">Play with a word</p>
                     <p id = "keyboard">{this.generateKeyboard()}</p>
