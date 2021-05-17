@@ -38,7 +38,13 @@ export default class Hangman extends React.Component {
         )
     }
     endGame = () => {
-        // TODO...
+        this.setState({
+            mistakes: 0,
+            guess: new Set([]),
+            answer: word.getRandom()
+        })
+        document.querySelector("#hangman-game").classList.add("hide");
+        document.querySelector("#hangman-newgame").classList.remove("hide");
     }
     resetGame = () => {
         this.setState({
@@ -46,8 +52,6 @@ export default class Hangman extends React.Component {
             guess: new Set([]),
             answer: word.getRandom()
         })
-        document.querySelector("#hangman-game").classList.toggle("hide");
-        document.querySelector("#hangman-newgame").classList.toggle("hide");
     }
     handleWordLength = (e) => {
         let length = e.target.value;
