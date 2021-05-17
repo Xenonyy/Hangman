@@ -33,20 +33,30 @@ export default class Hangman extends React.Component {
         let alphabet = [...Array(26).keys()].map(i => String.fromCharCode(i + 97));
         console.log(alphabet);
         return alphabet.map(letter => 
-            <button key={letter} value={letter} onClick={this.handleGuess}>{letter}</button>
+            <button key={letter} value={letter} onClick={this.handleGuess} disabled={this.state.guess.has(letter)}>{letter}</button>
         )
     }
     render() {
+        // Calculate the outcome of the game and display the state accordingly.
+        const correctAnswer = this.guessedLetter().join("") === this.state.answer;
         const gameOver = this.state.mistakes >= this.props.maxMistakes;
-        let keyboard = this.generateKeyboard();
+
+        let result = `It's a ${this.state.answer.length} letter word`;
+        // "An" edge-case
+        if (this.state.answer.length === 8) result = `It's an ${this.state.answer.length} letter word`;
+        if (correctAnswer) result = "You've won";
+        if (gameOver) result = "You've lost";
+        
+
         return(
             <div id="wrapper">
                 <article id="hangman-container">
                     <h1 id="hangman-title">The Hangman</h1>
-                    <p>Guess the word!</p>
-                    <p>{this.state.answer}</p>
+                    <p>{result}</p>
+                    {/* <p>{this.state.answer}</p> */}
                     <p>{gameOver ? `Correct word: ${this.state.answer}` : this.guessedLetter()}</p>
-                    <p>{keyboard}</p>
+                    <p id="keyboard-text">Play with a word</p>
+                    <p id = "keyboard">{this.generateKeyboard()}</p>
                 </article>
             </div>
         )
