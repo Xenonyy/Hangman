@@ -105,6 +105,7 @@ export default class Hangman extends React.Component {
                     <p>{gameOver ? `Correct word: ${this.state.answer}` : this.guessedLetter()}</p>
                     <p id="keyboard-text">Play with a word</p>
                     <p id = "keyboard">{this.generateKeyboard()}</p>
+                    <p id="mistakes">Number of <b>wrong</b> guesses: {this.state.mistakes} (out of {this.props.maxMistakes})</p>
                     <div id="button-container">
                         <button className="game-btn" onClick={this.endGame}>End Game</button>
                         <button className="game-btn" onClick={this.resetGame}>Start New Game</button>

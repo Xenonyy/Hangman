@@ -86,3 +86,6 @@ button {
     border: none;
 	font-size: .8rem;
 }
+#mistakes {
+	margin: 2em 0 0;
+}
