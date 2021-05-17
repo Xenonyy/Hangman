@@ -163,6 +163,12 @@ const words = [
 ];
 
 // Pick a random word
-const word = () => words[Math.floor(Math.random() * words.length)];
+const word = {
+    getRandom: () => words[Math.floor(Math.random() * words.length)],
+    getMaxLenght: Math.max(...(words.map(el => el.length))),
+    getMinLenght: Math.min(...(words.map(el => el.length)))
+}
+
+console.log(word.getMaxLenght, word.getMinLenght)
 
 export default word;
