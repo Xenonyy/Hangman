@@ -187,7 +187,7 @@ export default class Hangman extends React.Component {
                     {hangmanState}
                     <section id="hangman-main-container">
                         <h1 className="hangman-title">The Hangman</h1>
-                        <p style={{WebkitTextStrokeWidth:"medium"}}>{result}</p>
+                        <span style={{WebkitTextStrokeWidth:"medium"}}>{result}</span>
                         <p>{gameOver ? `Correct word: ${this.state.answer}` : this.guessedLetter()}</p>
                         <p id="keyboard-text">Play with a word</p>
                         <p id = "keyboard">{this.generateKeyboard()}</p>
