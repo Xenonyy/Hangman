@@ -3,6 +3,8 @@ import './Hangman.css'
 import word from '../Words/Words';
 import arrow from '../Images/right-arrow.png';
 import Header from '../Header/Header';
+import Win from '../Results/Win';
+import Lose from '../Results/Lose';
 
 import { ReactComponent as State0 } from '../Images/0.svg';
 import { ReactComponent as State1 } from '../Images/1.svg';
@@ -111,6 +113,7 @@ export default class Hangman extends React.Component {
         document.querySelector("#hangman-game").classList.add("hide");
         document.querySelector("#hangman-newgame").classList.add("hide");
         document.querySelector("#hangman-instructions").classList.remove("hide");
+        document.querySelector("#instructions").classList.add("hide");
     }
 
     //Hide the instructions and show the game page.
@@ -118,6 +121,7 @@ export default class Hangman extends React.Component {
         document.querySelector("#hangman-game").classList.remove("hide");
         document.querySelector("#hangman-newgame").classList.remove("hide");
         document.querySelector("#hangman-instructions").classList.add("hide");
+        document.querySelector("#instructions").classList.remove("hide");
     }
     render() {
         // Calculate the outcome of the game and display the state accordingly.
@@ -127,8 +131,8 @@ export default class Hangman extends React.Component {
         let result = `It's a ${this.state.answer.length} letter word`;
         // "An" edge-case
         if (this.state.answer.length === 8) result = `It's an ${this.state.answer.length} letter word`;
-        if (correctAnswer) result = "You've won";
-        if (gameOver) result = "You've lost";
+        if (correctAnswer) result = <Win />;
+        if (gameOver) result = <Lose />;
 
         // Conditional rendering of hangman SVG components based on the number of mistakes made.
         let hangmanState;
