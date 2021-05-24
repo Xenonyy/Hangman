@@ -132,7 +132,7 @@ export default class Hangman extends React.Component {
 
         let result = `It's a ${this.state.answer.length} letter word`;
         // "An" edge-case
-        if (this.state.answer.length === 8) result = `It's an ${this.state.answer.length} letter word`;
+        if (this.state.answer.length === 8 || this.state.answer.length === 11) result = `It's an ${this.state.answer.length} letter word`;
         if (correctAnswer) result = <Win />;
         if (gameOver) result = <Lose />;
         if (correctAnswer || gameOver) document.querySelector("#keyboard").classList.add("disabled");
