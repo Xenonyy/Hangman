@@ -1,4 +1,4 @@
-<svg viewBox="0 0 10 12">
+<svg viewBox="0 0 10 12" class="hangman-state">
   <path d="M1,11 h8"/>
   <path d="M9,11 v-10"/>
   <path d="M9,1 h-4"/>

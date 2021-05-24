@@ -4,9 +4,17 @@
 }
 svg path, svg circle {
 	stroke: #000;
-	stroke-width: 0.25;
-	stroke-linecap: round;
+	stroke-width: .55px;
+	stroke-linecap: square;
 	fill: none;
+}
+svg {
+	height: 20%;
+}
+.hangman-state {
+	position: absolute;
+    left: 0;
+    margin: 3.5em 2em 0 2em;
 }
 #wrapper {
 	display: flex;
@@ -26,7 +34,8 @@ svg path, svg circle {
     align-items: center;
     flex-flow: column;
 	background-color: #fff;
-	width: 50%;
+	width: 60%;
+	max-width: 55em;
 	height: 80%;
 	border-radius: 30px;
 	position: absolute;
@@ -35,6 +44,12 @@ svg path, svg circle {
 .hangman-title {
 	margin: 1em;
 	font-size: 3rem;
+}
+#hangman-main-container {
+	align-items: center;
+    display: flex;
+    flex-flow: column;
+    width: 100%;
 }
 button {
     margin: 5px;
@@ -78,7 +93,7 @@ button {
     text-align: center;
 }
 .hide {
-	display: none;
+	display: none !important;
 }
 #word-select-container {
 	width: 25%;
@@ -121,15 +136,12 @@ button {
 	cursor: pointer;
 }
 #instructions-container {
-	display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: wrap;
     width: 60%;
 	text-align: center;
+	max-height: 95%;
 }
 #instruction-title {
-	margin: 2em;
+	margin: 1em;
 	font-size: 2rem;
 }
 #instruction-btn {

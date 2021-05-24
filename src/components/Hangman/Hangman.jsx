@@ -4,6 +4,15 @@ import word from '../Words/Words';
 import arrow from '../Images/right-arrow.png';
 import Header from '../Header/Header';
 
+import { ReactComponent as State0 } from '../Images/0.svg';
+import { ReactComponent as State1 } from '../Images/1.svg';
+import { ReactComponent as State2 } from '../Images/2.svg';
+import { ReactComponent as State3 } from '../Images/3.svg';
+import { ReactComponent as State4 } from '../Images/4.svg';
+import { ReactComponent as State5 } from '../Images/5.svg';
+import { ReactComponent as State6 } from '../Images/6.svg';
+import { ReactComponent as CompleteHangman } from '../Images/CompleteHangman.svg';
+
 export default class Hangman extends React.Component {
     static defaultProps = {
         maxMistakes: 6
@@ -120,7 +129,19 @@ export default class Hangman extends React.Component {
         if (this.state.answer.length === 8) result = `It's an ${this.state.answer.length} letter word`;
         if (correctAnswer) result = "You've won";
         if (gameOver) result = "You've lost";
-        
+
+        // Conditional rendering of hangman SVG components based on the number of mistakes made.
+        let hangmanState;
+        switch (this.state.mistakes) {
+            case 0: hangmanState = <State0 />; break;
+            case 1: hangmanState = <State1 />; break;
+            case 2: hangmanState = <State2 />; break;
+            case 3: hangmanState = <State3 />; break;
+            case 4: hangmanState = <State4 />; break;
+            case 5: hangmanState = <State5 />; break;
+            case 6: hangmanState = <State6 />; break;
+            default:hangmanState = <State6 />; break;
+        }
         return(
             <div id="wrapper">
                 <Header/>
@@ -131,6 +152,7 @@ export default class Hangman extends React.Component {
                 <article className="hangman-container hide" id="hangman-instructions">
                     <h1 className="hangman-title">The Hangman</h1>
                     <div id="instructions-container">
+                        <CompleteHangman />
                         <p id="instruction-title"><b>Game Instructions</b></p>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
@@ -155,16 +177,19 @@ export default class Hangman extends React.Component {
                 </article>
 
                 <article className="hangman-container hide" id="hangman-game">
-                    <h1 className="hangman-title">The Hangman</h1>
-                    <p style={{WebkitTextStrokeWidth:"medium"}}>{result}</p>
-                    <p>{gameOver ? `Correct word: ${this.state.answer}` : this.guessedLetter()}</p>
-                    <p id="keyboard-text">Play with a word</p>
-                    <p id = "keyboard">{this.generateKeyboard()}</p>
-                    <p id="mistakes">Number of <b>wrong</b> guesses: {this.state.mistakes} (out of {this.props.maxMistakes})</p>
-                    <div id="button-container">
-                        <button className="game-btn" onClick={this.endGame}>End Game</button>
-                        <button className="game-btn" id ="new-game-btn" onClick={this.resetGame}>Start New Game</button>
-                    </div>
+                    {hangmanState}
+                    <section id="hangman-main-container">
+                        <h1 className="hangman-title">The Hangman</h1>
+                        <p style={{WebkitTextStrokeWidth:"medium"}}>{result}</p>
+                        <p>{gameOver ? `Correct word: ${this.state.answer}` : this.guessedLetter()}</p>
+                        <p id="keyboard-text">Play with a word</p>
+                        <p id = "keyboard">{this.generateKeyboard()}</p>
+                        <p id="mistakes">Number of <b>wrong</b> guesses: {this.state.mistakes} (out of {this.props.maxMistakes})</p>
+                        <div id="button-container">
+                            <button className="game-btn" onClick={this.endGame}>End Game</button>
+                            <button className="game-btn" id ="new-game-btn" onClick={this.resetGame}>Start New Game</button>
+                        </div>
+                    </section>
                 </article>
             </div>
         )
