@@ -95,6 +95,9 @@ button {
 .hide {
 	display: none !important;
 }
+.disabled {
+	pointer-events: none;
+}
 #word-select-container {
 	width: 25%;
     margin: 5em;

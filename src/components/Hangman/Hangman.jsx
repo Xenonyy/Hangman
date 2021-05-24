@@ -61,6 +61,7 @@ export default class Hangman extends React.Component {
         })
         document.querySelector("#hangman-game").classList.add("hide");
         document.querySelector("#hangman-newgame").classList.remove("hide");
+        document.querySelector("#keyboard").classList.remove("disabled");
     }
 
     // Reset the game with a random word.
@@ -70,6 +71,7 @@ export default class Hangman extends React.Component {
             guess: new Set([]),
             answer: word.getRandom()
         })
+        document.querySelector("#keyboard").classList.remove("disabled");
     }
     // Make the user able to select the length of the word and update state.
     handleWordLength = (e) => {
@@ -133,6 +135,7 @@ export default class Hangman extends React.Component {
         if (this.state.answer.length === 8) result = `It's an ${this.state.answer.length} letter word`;
         if (correctAnswer) result = <Win />;
         if (gameOver) result = <Lose />;
+        if (correctAnswer || gameOver) document.querySelector("#keyboard").classList.add("disabled");
 
         // Conditional rendering of hangman SVG components based on the number of mistakes made.
         let hangmanState;
