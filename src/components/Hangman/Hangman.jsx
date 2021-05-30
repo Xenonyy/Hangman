@@ -24,9 +24,14 @@ export default class Hangman extends React.Component {
         this.state = {
             mistakes: 0,
             answer: word.getRandom(),
-            guess: new Set([])
+            guess: new Set([]),
+            disabled: false,
+            showNew: true,
+            showGame: false,
+            showIns: false
         }
     }
+
     // Handle the correctness of the guess and update state accordingly.
     handleGuess = (e) => {
         let letter = e.target.value;
@@ -35,13 +40,13 @@ export default class Hangman extends React.Component {
             mistakes: this.state.mistakes + (this.state.answer.includes(letter) ? 0 : 1)
         });
     }
+
     // Reveal the character if it was guessed correctly.
     guessedLetter = () => this.state.answer.split("").map(letter => this.state.guess.has(letter) ? letter : " _ ");
 
     // Create a button for each letter of the English alphabet. Disable buttons which have had been clicked.
     generateKeyboard = () => {
         let alphabet = [...Array(26).keys()].map(i => String.fromCharCode(i + 97));
-        // console.log(alphabet);
         return alphabet.map(letter => 
             <button 
             key={letter} 
@@ -57,11 +62,11 @@ export default class Hangman extends React.Component {
         this.setState({
             mistakes: 0,
             guess: new Set([]),
-            answer: word.getRandom()
-        })
-        document.querySelector("#hangman-game").classList.add("hide");
-        document.querySelector("#hangman-newgame").classList.remove("hide");
-        document.querySelector("#keyboard").classList.remove("disabled");
+            answer: word.getRandom(),
+            disabled: false,
+            showNew: true,
+            showGame: false,
+        });
     }
 
     // Reset the game with a random word.
@@ -69,26 +74,19 @@ export default class Hangman extends React.Component {
         this.setState({
             mistakes: 0,
             guess: new Set([]),
-            answer: word.getRandom()
-        })
-        document.querySelector("#keyboard").classList.remove("disabled");
+            answer: word.getRandom(),
+            disabled: false
+        });
     }
+
     // Make the user able to select the length of the word and update state.
     handleWordLength = (e) => {
-        let length = e.target.value;
-        console.log(length, this.state.answer.length)
-        let correctLength = [];
-        // console.log(word.getFullArr)
-        // Will throw an error with strict equal!
-        word.getFullArr.map(word => word.length == length ? correctLength.push(word) : word); // eslint-disable-line
-        console.log(correctLength)
-        // console.log(findLength, correctLength)
-        const findRandom = () => correctLength[Math.floor(Math.random() * correctLength.length)];
-        // console.log(findRandom)
+        let length = parseInt(e.target.value);
+        let buttonLengthWords = word.getFullArr.filter(word => word.length === length);
+        const findRandom = () => buttonLengthWords[Math.floor(Math.random() * buttonLengthWords.length)];
         this.setState({
             answer: findRandom()
         });
-        // console.log(this.state.answer)
     }
 
     // Generate the buttons based on the min and max length of the words array.
@@ -106,24 +104,36 @@ export default class Hangman extends React.Component {
 
     // Hide the starting page and show the game.
     startGame = () => {
-        document.querySelector("#hangman-game").classList.toggle("hide");
-        document.querySelector("#hangman-newgame").classList.toggle("hide");
+        this.setState({
+            showGame: true,
+            showNew: false,
+            showIns: false
+        });
     }
 
     // Hide the starting and game pages and show the instructions.
     showInstructions = () => {
-        document.querySelector("#hangman-game").classList.add("hide");
-        document.querySelector("#hangman-newgame").classList.add("hide");
-        document.querySelector("#hangman-instructions").classList.remove("hide");
-        document.querySelector("#instructions").classList.add("hide");
+        this.setState({
+            showIns: true,
+            showNew: false,
+            showGame: false
+        });
     }
 
     //Hide the instructions and show the game page.
     hideInstructions = () => {
-        document.querySelector("#hangman-game").classList.remove("hide");
-        document.querySelector("#hangman-newgame").classList.remove("hide");
-        document.querySelector("#hangman-instructions").classList.add("hide");
-        document.querySelector("#instructions").classList.remove("hide");
+        this.setState({
+            showGame: true,
+            showNew: false,
+            showIns: false
+        });
+    }
+
+    // Set the state for the keyboard
+    disableKeyboard = () => {
+        this.setState({
+            disabled: true
+        });
     }
     render() {
         // Calculate the outcome of the game and display the state accordingly.
@@ -135,8 +145,10 @@ export default class Hangman extends React.Component {
         if (this.state.answer.length === 8 || this.state.answer.length === 11) result = `It's an ${this.state.answer.length} letter word`;
         if (correctAnswer) result = <Win />;
         if (gameOver) result = <Lose />;
-        if (correctAnswer || gameOver) document.querySelector("#keyboard").classList.add("disabled");
-
+        
+        const checkKeyboardState = () => {
+            if (gameOver || correctAnswer) this.disableKeyboard();
+        }
         // Conditional rendering of hangman SVG components based on the number of mistakes made.
         let hangmanState;
         switch (this.state.mistakes) {
@@ -149,48 +161,33 @@ export default class Hangman extends React.Component {
             case 6: hangmanState = <State6 />; break;
             default:hangmanState = <State6 />; break;
         }
-        return(
-            <div id="wrapper">
-                <Header/>
-                <section id="instructions" >
-                    Instructions
-                    <img src={arrow} alt="Arrow" id="right-arrow" onClick={this.showInstructions}/>
-                </section>
-                <article className="hangman-container hide" id="hangman-instructions">
-                    <h1 className="hangman-title">The Hangman</h1>
-                    <div id="instructions-container">
-                        <CompleteHangman />
-                        <p id="instruction-title"><b>Game Instructions</b></p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <br /> <br />
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        <p></p>
-                        <button id="instruction-btn" onClick={this.hideInstructions}>Got it!</button>
-                    </div>
-                </article>
 
-                <article className="hangman-container" id="hangman-newgame">
-                    <h1 className="hangman-title">The Hangman</h1>
-                    <div id="new-game-container">
-                        <p>Let's play <b>Hangman!</b></p>
-                        <p>How many letters do you want in your word?</p>
-                    </div>
-                    <div id="word-select-container">
-                        <p>{this.generateWordLength()}</p>
-                        <button id="play-btn" value={this.state.answer.length} onClick={() => {this.startGame();}}>Let's play!</button>
-                    </div>
-                </article>
-
-                <article className="hangman-container hide" id="hangman-game">
+        // New game component
+        const NewGame = () => (
+            <article className="hangman-container" id="hangman-newgame">
+                <h1 className="hangman-title">The Hangman</h1>
+                <div id="new-game-container">
+                    <p>Let's play <b>Hangman!</b></p>
+                    <p>How many letters do you want in your word?</p>
+                </div>
+                <div id="word-select-container">
+                    <p>{this.generateWordLength()}</p>
+                    <button id="play-btn" value={this.state.answer.length} onClick={this.startGame}>Let's play!</button>
+                </div>
+            </article>
+        )
+        
+        // Main game component
+        const HangmanGame = () => {
+            return(
+                <article className="hangman-container" id="hangman-game">
                     {hangmanState}
                     <section id="hangman-main-container">
                         <h1 className="hangman-title">The Hangman</h1>
                         <span style={{WebkitTextStrokeWidth:"medium"}}>{result}</span>
                         <p>{gameOver ? `Correct word: ${this.state.answer}` : this.guessedLetter()}</p>
                         <p id="keyboard-text">Play with a word</p>
-                        <p id = "keyboard">{this.generateKeyboard()}</p>
+                        <p id="keyboard" onClickCapture={checkKeyboardState}>{this.generateKeyboard()}</p>
                         <p id="mistakes">Number of <b>wrong</b> guesses: {this.state.mistakes} (out of {this.props.maxMistakes})</p>
                         <div id="button-container">
                             <button className="game-btn" onClick={this.endGame}>End Game</button>
@@ -198,7 +195,38 @@ export default class Hangman extends React.Component {
                         </div>
                     </section>
                 </article>
-            </div>
+            )
+        }
+
+        // Instructions page component
+        const Instructions = () => (
+            <article className="hangman-container" id="hangman-instructions">
+                <h1 className="hangman-title">The Hangman</h1>
+                <div id="instructions-container">
+                    <CompleteHangman />
+                    <p id="instruction-title"><b>Game Instructions</b></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <br /> <br />
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                    <p></p>
+                    <button id="instruction-btn" onClick={this.hideInstructions}>Got it!</button>
+                </div>
+            </article>
+        )
+        return(
+            <main id="wrapper">
+                <Header/>
+                <section id="instructions" >
+                    Instructions
+                    <img src={arrow} alt="Arrow" id="right-arrow" onClick={this.showInstructions}/>
+                </section>
+                
+                {this.state.showNew ? <NewGame /> : null}
+                {this.state.showGame ? <HangmanGame /> : null}
+                {this.state.showIns ? <Instructions /> : null}
+            </main>
         )
     }
 }
