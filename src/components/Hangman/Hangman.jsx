@@ -105,26 +105,20 @@ export default class Hangman extends React.Component {
     // Hide the starting page and show the game.
     startGame = () => {
         this.setState({
-            showGame: true,
-            showNew: false,
-            showIns: false
+            showGame: true
         });
     }
 
     // Hide the starting and game pages and show the instructions.
     showInstructions = () => {
         this.setState({
-            showIns: true,
-            showNew: false,
-            showGame: false
+            showIns: true
         });
     }
 
     //Hide the instructions and show the game page.
     hideInstructions = () => {
         this.setState({
-            showGame: true,
-            showNew: false,
             showIns: false
         });
     }
