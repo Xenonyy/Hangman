@@ -165,7 +165,7 @@ export default class Hangman extends React.Component {
                     <p>How many letters do you want in your word?</p>
                 </div>
                 <div id="word-select-container">
-                    <p>{this.generateWordLength()}</p>
+                    <p style={{"display": 'flex', "flexWrap": 'wrap', "justifyContent": 'center'}}>{this.generateWordLength()}</p>
                     <button id="play-btn" value={this.state.answer.length} onClick={this.startGame}>Let's play!</button>
                 </div>
             </article>
