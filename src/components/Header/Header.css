@@ -26,17 +26,10 @@
 }
 .icon {
     filter: invert(1);
-    left: 1.5em;
-    position: relative;
-}
-#email-icon {
-    transform: scale(0.4);
-}
-#github-icon {
-    transform: scale(0.33);
+    max-width: 42px;
+    margin: 0 1em 0 2.5em;
 }
 #linkedin-icon {
-    transform: scale(0.3);
     filter: brightness(0) invert(1);
 }
 
