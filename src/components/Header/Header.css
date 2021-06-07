@@ -8,10 +8,62 @@
     justify-content: flex-start;
     align-items: center;
     padding: 0 5em;
+    color: whitesmoke;
 }
 #hangman-logo {
     width: 8%;
     max-width: 48px;
     filter: invert(1);
     margin: 0 1em;
+}
+
+/* HEADER LINKS */
+#links {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+.icon {
+    filter: invert(1);
+    left: 1.5em;
+    position: relative;
+}
+#email-icon {
+    transform: scale(0.4);
+}
+#github-icon {
+    transform: scale(0.33);
+}
+#linkedin-icon {
+    transform: scale(0.3);
+    filter: brightness(0) invert(1);
+}
+
+/* LINK + HOVER ANIMATION */
+.text-link {
+    position: relative;
+    text-decoration: none;
+    color: mediumspringgreen;
+    font-weight: 700;
+}
+a:after {    
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0px;
+    content: close-quote;
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #fff;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+}
+a:after {
+    background-color: currentColor;
+    transition: width 0.5s ease 0s, left 0.5s ease 0s;
+}
+a:hover:after {
+    width: 100%;
+    left: 0;
 }
