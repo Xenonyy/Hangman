@@ -14,6 +14,7 @@ import { ReactComponent as State4 } from '../Images/4.svg';
 import { ReactComponent as State5 } from '../Images/5.svg';
 import { ReactComponent as State6 } from '../Images/6.svg';
 import { ReactComponent as CompleteHangman } from '../Images/CompleteHangman.svg';
+import { Footer } from '../Footer/Footer';
 
 export default class Hangman extends React.Component {
     static defaultProps = {
@@ -220,6 +221,8 @@ export default class Hangman extends React.Component {
                 {this.state.showNew ? <NewGame /> : null}
                 {this.state.showGame ? <HangmanGame /> : null}
                 {this.state.showIns ? <Instructions /> : null}
+                
+                <Footer />
             </main>
         )
     }
