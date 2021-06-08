@@ -1,0 +1,211 @@
+#header-phone {
+    width: 100%;
+    height: 4em;
+    position: fixed;
+    background-color: black;
+    z-index: 3;
+    outline: mediumspringgreen 2px solid;
+}
+#header-phone-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 5%;
+    z-index: 3;
+}
+.phone-icon {
+    width: 50px;
+    height: 50px;
+    filter: invert(1);
+}
+#github-phone-icon {
+    filter: drop-shadow(0px 0px 1px mediumspringgreen);
+}
+#linkedin-phone-icon {
+    filter: hue-rotate(310deg);
+}
+#header-phone-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+    font-size: 1rem;
+    font-family: 'Quantico';
+}
+#header-phone-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    height: 100%;
+    position: absolute;
+    align-content: space-evenly;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/************** HAMBURGER MENU AND HEADER ON PHONE **************************/
+#menu-toggle #hamburger span {
+    display: block;
+    background: mediumspringgreen;
+    border-radius: 2px;
+}
+#menu-toggle {
+    transform: scale(0.45);
+    right: 0em;
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    cursor: pointer;
+    background: #151515;
+    border-radius: 10px;
+    z-index: 3;
+}
+#hamburger {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+#hamburger span {
+    transition: 0.25s ease-in-out;
+    width: 60px;
+    height: 4px;
+    position: relative;
+    top: 24px;
+    left: 20px;
+    margin: 10px 0;
+}
+#hamburger span:nth-child(1) {
+    transition-delay: 0.5s;
+}
+#hamburger span:nth-child(2) {
+    transition-delay: 0.625s;
+}
+#hamburger span:nth-child(3) {
+    transition-delay: 0.75s;
+}
+#cross {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transform: rotate(45deg);
+}
+#cross span {
+    transition: 0.25s ease-in-out;
+}
+#cross span:nth-child(1) {
+    height: 0%;
+    width: 4px;
+    position: absolute;
+    top: 10%;
+    left: 48px;
+    transition-delay: 0s;
+}
+#cross span:nth-child(2) {
+    width: 0%;
+    height: 4px;
+    position: absolute;
+    left: 10%;
+    top: 48px;
+    transition-delay: 0.25s;
+}
+#menu-toggle.open #hamburger span {
+    width: 0%;
+}
+#menu-toggle.open #hamburger span:nth-child(1) {
+    transition-delay: 0s;
+}
+#menu-toggle.open #hamburger span:nth-child(2) {
+    transition-delay: 0.125s;
+}
+#menu-toggle.open #hamburger span:nth-child(3) {
+    transition-delay: 0.25s;
+}
+#menu-toggle.open #cross span:nth-child(1) {
+    height: 80%;
+    transition-delay: 0.625s;
+    background-color: mediumspringgreen;
+}
+#menu-toggle.open #cross span:nth-child(2) {
+    width: 80%;
+    transition-delay: 0.375s;
+    background-color: mediumspringgreen;
+}
+#header-phone-text {
+    color: whitesmoke;
+    text-shadow: black 1px 1px;
+    font-size: 1.5rem;
+    margin-left: 0.5em;
+    height: 8px;
+}
+#header-menu {
+    width: 100%;
+    height: 100%;
+    background-color: #272727;
+    position: fixed;
+    right: 0;
+    z-index: 3;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row;
+    transform: translateY(-40em);
+    transition-duration: .75s;
+}
+.animation {
+    transform: translateY(0em) !important;
+}
+.hidden {
+    opacity: 0;
+    z-index: -1 !important;
+}
+#contact-phone {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: wrap;
+    align-items: flex-end;
+    height: 88%;
+}
+#project-link-container {
+    width: 100%;
+    flex-flow: column;
+    display: flex;
+    align-items: center;
+    height: 90%;
+    justify-content: flex-end;
+}
+#src-code-container {
+    width: fit-content;
+    padding: 1em;
+    text-align: center;
+    border: 2px solid mediumspringgreen;
+    border-radius: 10px;
+}
+#contact-container {
+    text-align: center;
+    width: fit-content;
+    border: 2px solid #00fa9a;
+    border-radius: 10px;
+    padding: 1em 2em 2em;
+    margin: 4em 0;
+    font-size: .7rem;
+}
+.link-text {
+    color: whitesmoke;
+    text-shadow: 1px 1px black;
+    font-size: 1.2rem;
+}
+#header-phone-copyright {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 0;
+    align-items: center;
+    color: mediumspringgreen;
+    position: absolute;
+    bottom: 0rem;
+    background-color: #1d1d1d;
+    height: 2.5rem;
+    font-size: .7rem;
+}
