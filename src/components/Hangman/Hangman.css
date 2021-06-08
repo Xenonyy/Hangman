@@ -230,13 +230,13 @@ button:focus, button:hover {
 	.result {font-weight: 500;}
 }
 @media screen and (min-width: 1366px) {
-	.hangman-container {min-height: 80vh; width: 70%;}
+	.hangman-container {width: 70%;}
 	#word-select-container {width: 25%; margin: 2em; transform: scale(1.5); height: 50%;}
 	#new-game-container {width: 40%; font-size: 1.5rem;}
 	#hangman-instructions {overflow: hidden;}
 	#instructions {margin: 8em 0 0 12em;}
-	.hangman-state {margin-top: 12em;}
-	.hangman-title {margin: 2em 0 .5em;}
+	.hangman-state {margin-top: 10em;}
+	.hangman-title {margin: 1em 0 .5em;}
 	#keyboard {width: 45%;}
-	#answer-word {margin: 9em 0 1em;}
+	#answer-word {margin: 8em 0 1em;}
 }
