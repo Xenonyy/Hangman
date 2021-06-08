@@ -11,22 +11,26 @@ svg path, svg circle {
 svg {
 	height: 20%;
 }
-body {
-	overflow-x: clip;
-    overflow-y: clip;
+html, body {
+	/* overflow-x: clip; */
+    /* overflow-y: clip; */
+	font-family: 'Noto Sans';
 }
 .hangman-state {
 	position: absolute;
-    left: 0;
-    margin: 3.5em 2em 0 2em;
+	margin-top: 11em;
+	max-height: 9em;
 }
 #wrapper {
 	display: flex;
-    justify-content: center;
+    /* justify-content: center; */
+	justify-content: flex-start;
     align-items: center;
     flex-flow: column;
 	background-color: #2d2d2d;
     min-height: 100vh;
+	position: relative;
+	overflow: hidden;
 }
 #wrapper:before {
     content: "";
@@ -49,16 +53,19 @@ body {
     align-items: center;
     flex-flow: column;
 	background-color: #fff;
-	width: 60%;
+	width: 100%;
 	max-width: 55em;
-	height: 80%;
-	border-radius: 30px;
+	height: 85%;
+	/* height: 80%; */
+	/* border-radius: 30px; */
 	position: absolute;
-	padding: 3em 0;
+	margin-top: 3.5em;
+	min-height: 100vh;
+	overflow: auto;
 }
 .hangman-title {
-	margin: 1em 0 .5em;
-	font-size: 3rem;
+	margin: 2.5em 0 .5em;
+	font-size: 2rem;
 }
 #hangman-main-container {
 	align-items: center;
@@ -75,14 +82,24 @@ button {
     border-radius: 2px;
     text-transform: uppercase;
     background-color: #fff;
-    filter: drop-shadow(0px 0px 2px grey);
+    border: 2px solid mediumspringgreen;
+	border-radius: 5px;
+}
+button:disabled {
+	border: 2px solid black;
+    background-color: #808080;
+
+}
+button:focus, button:hover {
+    background-color: mediumspringgreen;
+
 }
 #new-game-btn {
 	background-color: #000;
     color: #fff;
 }
 #keyboard {
-    width: 40%;
+    width: 90%;
     display: flex;
     flex-flow: wrap;
     justify-content: center;
@@ -96,17 +113,15 @@ button {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 3em;
+	margin: 2em 0 8em;
 }
 .game-btn {
 	min-width: 11em;
 }
 #new-game-container {
-	width: 40%;
-    font-size: 1.5rem;
-    flex-wrap: wrap;
+	width: 90%;
     text-align: center;
-	margin-top: 1.5em;
+	margin-top: 3em;
 }
 .hide {
 	display: none !important;
@@ -114,20 +129,31 @@ button {
 .disabled {
 	pointer-events: none;
 }
+#answer-word {
+	margin: 8em 0 1em;
+}
 #word-select-container {
-	width: 25%;
-    margin: 5em;
-    transform: scale(1.4);
+	width: 70%;
+    margin: 15%;
+    /* transform: scale(1.4); */
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+	align-items: flex-end;
+    height: 50%;
 }
 #play-btn {
 	background-color: black;
 	color: #fff;
-	position: absolute;
-    width: 70%;
-    margin: 3em;
+	/* position: absolute; */
+    width: 60%;
+    margin: 0 0 8em;
     border-radius: 10px;
     border: none;
 	font-size: .8rem;
+}
+#hangman-newgame {
+	overflow: hidden;
 }
 #mistakes {
 	margin: 2em 0 0;
@@ -138,16 +164,19 @@ button {
 	position: relative;
 	z-index: 1;
 	text-align: end; */
-	width: 45%;
-    height: 30%;
+	/* width: 45%; */
+    /* height: 30%; */
     z-index: 1;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    top: 0;
-    position: absolute;
+    /* top: 0; */
+    /* position: absolute; */
 	text-transform: uppercase;
 	font-weight: 500;
+	/* top: 10%; */
+	/* position: absolute; */
+	margin: 5em 0 0;
 }
 #right-arrow {
 	width: 10%;
@@ -155,7 +184,7 @@ button {
 	cursor: pointer;
 }
 #instructions-container {
-    width: 60%;
+    width: 80%;
 	text-align: center;
 	max-height: 95%;
 	margin-top: 1.5em;
@@ -165,9 +194,48 @@ button {
 	font-size: 2rem;
 }
 #instruction-btn {
-	margin-top: 4em;
+	margin: 3em 0 10em;
     background: #000;
     color: #fff;
     border-radius: 10px;
     padding: 0 4em;
+}
+
+::-webkit-scrollbar-thumb {
+    background:#00fa9a;
+    border-radius: 30px;
+    height: 10%;
+}
+::-webkit-scrollbar-track {
+    background: #5fb379;
+    border-radius: 30px;
+}
+::-webkit-scrollbar {
+    width: 6px;
+}
+/* Responsiveness */
+
+@media screen and (min-width: 768px) {
+	.hangman-container {width: 75%; max-width: 55em; height: 0; border-radius: 20px; margin-top: 7.5em; min-height: 75vh;}
+	#new-game-container {width: 80%; font-size: 1.5rem; margin: 2em 0;}
+	#word-select-container {width: 55%; margin: 2em; transform: scale(1.2); height: 50%;}
+	#keyboard {width: 60%;}
+	#button-container, #instruction-btn {margin: 2em;}
+	.hangman-state {margin-top: 10em; height: 18%;}
+	.hangman-title {font-size: 2.5rem; margin: 1em 0 .5em;}
+	.result-container {margin-top: -1em;}
+	/* #answer-word {margin: 6em 0 1em;} */
+	#footer {height: 2.5rem !important; font-size: .9rem !important;}
+	#instructions {margin: 8em 0 0 8em;}
+}
+@media screen and (min-width: 1366px) {
+	.hangman-container {min-height: 80vh; width: 70%;}
+	#word-select-container {width: 25%; margin: 2em; transform: scale(1.5); height: 50%;}
+	#new-game-container {width: 40%; font-size: 1.5rem;}
+	#hangman-instructions {overflow: hidden;}
+	#instructions {margin: 8em 0 0 12em;}
+	.hangman-state {margin-top: 12em;}
+	.hangman-title {margin: 2em 0 .5em;}
+	#keyboard {width: 45%;}
+	#answer-word {margin: 9em 0 1em;}
 }
