@@ -12,7 +12,8 @@ export default class Header extends React.Component {
                 <img src={logo} alt="Hangman logo" id="hangman-logo"/>
                 <p style={{textTransform: "uppercase", fontWeight: "700"}}>Hangman</p>
                 <section id="links">
-                    <img src={email} alt="Email" id="email-icon" className="icon"/>
+                    <img src={email} style={{maxWidth: "52px"}} alt="Email" id="email-icon" className="icon"/>
+                    {/* <img src = "https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt = "email-icon" id = "email-icon"></img> */}
                     <p>gonda.armand@gmail.com</p>
 
                     <img src={linkedin} alt="LinkedIn" id="linkedin-icon" className="icon"/>
