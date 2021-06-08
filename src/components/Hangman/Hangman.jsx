@@ -2,7 +2,6 @@ import React from 'react';
 import './Hangman.css'
 import word from '../Words/Words';
 import arrow from '../Images/right-arrow.png';
-import Header from '../Header/Header';
 import Win from '../Results/Win';
 import Lose from '../Results/Lose';
 
@@ -15,6 +14,7 @@ import { ReactComponent as State5 } from '../Images/5.svg';
 import { ReactComponent as State6 } from '../Images/6.svg';
 import { ReactComponent as CompleteHangman } from '../Images/CompleteHangman.svg';
 import { Footer } from '../Footer/Footer';
+import ConditionalHeader, { isMobile } from '../Header/ConditionalHeader';
 
 export default class Hangman extends React.Component {
     static defaultProps = {
@@ -180,8 +180,7 @@ export default class Hangman extends React.Component {
                     <section id="hangman-main-container">
                         <h1 className="hangman-title">The Hangman</h1>
                         <span style={{WebkitTextStrokeWidth:"medium"}}>{result}</span>
-                        <p>{gameOver ? `Correct word: ${this.state.answer}` : this.guessedLetter()}</p>
-                        <p id="keyboard-text">Play with a word</p>
+                        <p id="answer-word" style={{fontSize: "1.2rem", color: "mediumspringgreen"}}>{gameOver ? `Correct word: ${this.state.answer}` : this.guessedLetter()}</p>
                         <p id="keyboard" onClickCapture={checkKeyboardState}>{this.generateKeyboard()}</p>
                         <p id="mistakes">Number of <b>wrong</b> guesses: {this.state.mistakes} (out of {this.props.maxMistakes})</p>
                         <div id="button-container">
@@ -212,11 +211,13 @@ export default class Hangman extends React.Component {
         )
         return(
             <main id="wrapper">
-                <Header/>
-                <section id="instructions" >
-                    Instructions
-                    <img src={arrow} alt="Arrow" id="right-arrow" onClick={this.showInstructions}/>
-                </section>
+                <ConditionalHeader/>
+                { this.state.showIns ? null :
+                    <section id="instructions" >
+                        { !isMobile ? <p>Instructions</p> : null}
+                        <img src={arrow} alt="Arrow" id="right-arrow" onClick={this.showInstructions}/>
+                    </section>
+                }
                 
                 {this.state.showNew ? <NewGame /> : null}
                 {this.state.showGame ? <HangmanGame /> : null}
