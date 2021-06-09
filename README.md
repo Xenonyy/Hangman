@@ -1,6 +1,6 @@
 # About this project
 
-A game made in React, where you can play the classic Hangman.
+A game made in React, where you can play the classic Hangman.\
 Responsive design and custom functionality and layout for mobile devices.
 
 Main features:
@@ -8,7 +8,6 @@ Main features:
 - Ability to play as many rounds as you want without refreshing the webpage.
 - Displaying the number of wrong guesses, already guessed letters, and updating hangman based on mistakes using React state.
 - Responsive design. Fully supported for mobile devices with custom layouts and behavior.
-- 
                      
 ![alt text](https://i.gyazo.com/7fd9bcae35adae40cb8e69542fd6d502.png)
 
@@ -45,7 +44,7 @@ The page will automatically reload if you make changes to the code.
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
+The build is minified and the filenames include the hashes.
 
 # Author
 
