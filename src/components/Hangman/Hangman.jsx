@@ -27,7 +27,6 @@ export default class Hangman extends React.Component {
             answer: word.getRandom(),
             guess: new Set([]),
             disabled: false,
-            showNew: true,
             showGame: false,
             showIns: false
         }
@@ -65,7 +64,6 @@ export default class Hangman extends React.Component {
             guess: new Set([]),
             answer: word.getRandom(),
             disabled: false,
-            showNew: true,
             showGame: false,
         });
     }
@@ -157,41 +155,6 @@ export default class Hangman extends React.Component {
             default:hangmanState = <State6 />; break;
         }
 
-        // New game component
-        const NewGame = () => (
-            <article className="hangman-container" id="hangman-newgame">
-                <h1 className="hangman-title">The Hangman</h1>
-                <div id="new-game-container">
-                    <p>Let's play <b>Hangman!</b></p>
-                    <p>How many letters do you want in your word?</p>
-                </div>
-                <div id="word-select-container">
-                    <p style={{"display": 'flex', "flexWrap": 'wrap', "justifyContent": 'center'}}>{this.generateWordLength()}</p>
-                    <button id="play-btn" value={this.state.answer.length} onClick={this.startGame}>Let's play!</button>
-                </div>
-            </article>
-        )
-        
-        // Main game component
-        const HangmanGame = () => {
-            return(
-                <article className="hangman-container" id="hangman-game">
-                    {hangmanState}
-                    <section id="hangman-main-container">
-                        <h1 className="hangman-title">The Hangman</h1>
-                        <span>{result}</span>
-                        <p id="answer-word" style={{fontSize: "1.2rem", color: "mediumspringgreen"}}>{gameOver ? `Correct word: ${this.state.answer}` : this.guessedLetter()}</p>
-                        <p id="keyboard" onClickCapture={checkKeyboardState}>{this.generateKeyboard()}</p>
-                        <p id="mistakes">Number of <b>wrong</b> guesses: {this.state.mistakes} (out of {this.props.maxMistakes})</p>
-                        <div id="button-container">
-                            <button className="game-btn" onClick={this.endGame}>End Game</button>
-                            <button className="game-btn" id ="new-game-btn" onClick={this.resetGame}>Start New Game</button>
-                        </div>
-                    </section>
-                </article>
-            )
-        }
-
         // Instructions page component
         const Instructions = () => (
             <article className="hangman-container" id="hangman-instructions">
@@ -218,9 +181,34 @@ export default class Hangman extends React.Component {
                         <img src={arrow} alt="Arrow" id="right-arrow" onClick={this.showInstructions}/>
                     </section>
                 }
+                {this.state.showGame ? <article className="hangman-container" id="hangman-game">
+                        {hangmanState}
+                        <section id="hangman-main-container">
+                            <h1 className="hangman-title">The Hangman</h1>
+                            <span>{result}</span>
+                            <p id="answer-word" style={{fontSize: "1.2rem", color: "mediumspringgreen"}}>{gameOver ? `Correct word: ${this.state.answer}` : this.guessedLetter()}</p>
+                            <p id="keyboard" onClickCapture={checkKeyboardState}>{this.generateKeyboard()}</p>
+                            <p id="mistakes">Number of <b>wrong</b> guesses: {this.state.mistakes} (out of {this.props.maxMistakes})</p>
+                            <div id="button-container">
+                                <button className="game-btn" onClick={this.endGame}>End Game</button>
+                                <button className="game-btn" id ="new-game-btn" onClick={this.resetGame}>Start New Game</button>
+                            </div>
+                        </section>
+                    </article> 
+                :
+                    <article className="hangman-container" id="hangman-newgame">
+                        <h1 className="hangman-title">The Hangman</h1>
+                        <div id="new-game-container">
+                            <p>Let's play <b>Hangman!</b></p>
+                            <p>How many letters do you want in your word?</p>
+                        </div>
+                        <div id="word-select-container">
+                            <p style={{"display": 'flex', "flexWrap": 'wrap', "justifyContent": 'center'}}>{this.generateWordLength()}</p>
+                            <button id="play-btn" value={this.state.answer.length} onClick={this.startGame}>Let's play!</button>
+                        </div>
+                    </article>
+                }
                 
-                {this.state.showNew ? <NewGame /> : null}
-                {this.state.showGame ? <HangmanGame /> : null}
                 {this.state.showIns ? <Instructions /> : null}
                 
                 <Footer />
