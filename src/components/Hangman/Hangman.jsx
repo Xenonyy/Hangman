@@ -26,7 +26,6 @@ export default class Hangman extends React.Component {
             mistakes: 0,
             answer: word.getRandom(),
             guess: new Set([]),
-            disabled: false,
             showGame: false,
             showIns: false
         }
@@ -63,9 +62,9 @@ export default class Hangman extends React.Component {
             mistakes: 0,
             guess: new Set([]),
             answer: word.getRandom(),
-            disabled: false,
             showGame: false,
         });
+        this.enableKeyboard();
     }
 
     // Reset the game with a random word.
@@ -74,8 +73,8 @@ export default class Hangman extends React.Component {
             mistakes: 0,
             guess: new Set([]),
             answer: word.getRandom(),
-            disabled: false
         });
+        this.enableKeyboard();
     }
 
     // Make the user able to select the length of the word and update state.
@@ -123,11 +122,9 @@ export default class Hangman extends React.Component {
     }
 
     // Set the state for the keyboard
-    disableKeyboard = () => {
-        this.setState({
-            disabled: true
-        });
-    }
+    disableKeyboard = () => document.querySelector("#keyboard").style.pointerEvents = "none"; // document.querySelectorAll(".virtual-buttons").forEach(e => e.setAttribute("disabled", ""));
+    enableKeyboard = () => document.querySelector("#keyboard").style.pointerEvents = "all";
+
     render() {
         // Calculate the outcome of the game and display the state accordingly.
         const correctAnswer = this.guessedLetter().join("") === this.state.answer;
@@ -138,10 +135,8 @@ export default class Hangman extends React.Component {
         if (this.state.answer.length === 8 || this.state.answer.length === 11) result = `It's an ${this.state.answer.length} letter word`;
         if (correctAnswer) result = <Win />;
         if (gameOver) result = <Lose />;
-        
-        const checkKeyboardState = () => {
-            if (gameOver || correctAnswer) this.disableKeyboard();
-        }
+        if (gameOver || correctAnswer) this.disableKeyboard();
+
         // Conditional rendering of hangman SVG components based on the number of mistakes made.
         let hangmanState;
         switch (this.state.mistakes) {
@@ -187,7 +182,7 @@ export default class Hangman extends React.Component {
                             <h1 className="hangman-title">The Hangman</h1>
                             <span>{result}</span>
                             <p id="answer-word" style={{fontSize: "1.2rem", color: "mediumspringgreen"}}>{gameOver ? `Correct word: ${this.state.answer}` : this.guessedLetter()}</p>
-                            <p id="keyboard" onClickCapture={checkKeyboardState}>{this.generateKeyboard()}</p>
+                            <p id="keyboard">{this.generateKeyboard()}</p>
                             <p id="mistakes">Number of <b>wrong</b> guesses: {this.state.mistakes} (out of {this.props.maxMistakes})</p>
                             <div id="button-container">
                                 <button className="game-btn" onClick={this.endGame}>End Game</button>
