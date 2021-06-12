@@ -67,6 +67,9 @@ html, body {
 	margin: 2.5em 0 .5em;
 	font-size: 2rem;
 }
+#hangman-main-container > span {
+	height: 2em;
+}
 #hangman-main-container {
 	align-items: center;
     display: flex;
@@ -151,9 +154,6 @@ button:focus, button:hover {
     border-radius: 10px;
     border: none;
 	font-size: .8rem;
-}
-#hangman-newgame {
-	overflow: hidden;
 }
 #mistakes {
 	margin: 2em 0 0;
