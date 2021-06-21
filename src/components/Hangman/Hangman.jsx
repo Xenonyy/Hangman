@@ -204,7 +204,7 @@ export default class Hangman extends React.Component {
                     </article>
                 }
                 
-                {this.state.showIns ? <Instructions /> : null}
+                {this.state.showIns && <Instructions />}
                 
                 <Footer />
             </main>
