@@ -12,8 +12,6 @@ svg {
 	height: 20%;
 }
 html, body {
-	/* overflow-x: clip; */
-    /* overflow-y: clip; */
 	font-family: 'Noto Sans';
 }
 .hangman-state {
@@ -23,7 +21,6 @@ html, body {
 }
 #wrapper {
 	display: flex;
-    /* justify-content: center; */
 	justify-content: flex-start;
     align-items: center;
     flex-flow: column;
@@ -56,8 +53,6 @@ html, body {
 	width: 100%;
 	max-width: 55em;
 	height: 85%;
-	/* height: 80%; */
-	/* border-radius: 30px; */
 	position: absolute;
 	margin-top: 3.5em;
 	min-height: 100vh;
@@ -87,6 +82,7 @@ button {
     background-color: #fff;
     border: 2px solid mediumspringgreen;
 	border-radius: 5px;
+	transition: .4s all;
 }
 button:disabled {
 	border: 2px solid black;
@@ -138,7 +134,6 @@ button:focus, button:hover {
 #word-select-container {
 	width: 70%;
     margin: 5%;
-    /* transform: scale(1.4); */
 	display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -148,7 +143,6 @@ button:focus, button:hover {
 #play-btn {
 	background-color: black;
 	color: #fff;
-	/* position: absolute; */
     width: 60%;
     margin: 0 0 8em;
     border-radius: 10px;
@@ -159,23 +153,12 @@ button:focus, button:hover {
 	margin: 2em 0 0;
 }
 #instructions {
-	/* width: 40%;
-	height: 45em;
-	position: relative;
-	z-index: 1;
-	text-align: end; */
-	/* width: 45%; */
-    /* height: 30%; */
     z-index: 1;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    /* top: 0; */
-    /* position: absolute; */
 	text-transform: uppercase;
 	font-weight: 500;
-	/* top: 10%; */
-	/* position: absolute; */
 	margin: 5em 0 0;
 }
 #right-arrow {
@@ -213,8 +196,8 @@ button:focus, button:hover {
 ::-webkit-scrollbar {
     width: 6px;
 }
-/* Responsiveness */
 
+/* Responsiveness */
 @media screen and (min-width: 768px) {
 	.hangman-container {width: 75%; max-width: 55em; height: 0; border-radius: 20px; margin-top: 7.5em; min-height: 75vh;}
 	#new-game-container {width: 80%; font-size: 1.5rem; margin: 2em 0;}
