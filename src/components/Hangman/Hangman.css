@@ -93,6 +93,9 @@ button:focus, button:hover {
     background-color: mediumspringgreen;
 
 }
+button:focus {
+	border: 2px solid black;
+}
 #new-game-btn {
 	background-color: #000;
     color: #fff;
