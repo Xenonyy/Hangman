@@ -1,20 +1,16 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import logo from '../Images/logo.png';
 import github from '../Images/github.webp';
 import linkedin from '../Images/linkedin.webp';
 import './HeaderPhone.css';
 
-export default class HeaderPhone extends React.Component {
-    MenuAnimation = () => {
-        const menu = document.getElementById("menu-toggle");
-        const header_menu = document.getElementById("header-menu");
-            menu.classList.toggle('open');
-            header_menu.classList.toggle('hidden');
-            header_menu.classList.toggle('animation');
+export default function HeaderPhone (): ReactElement[] {
+    const [openMenu, setOpenMenu] = React.useState(false);
+    const MenuAnimation = () => {
+        setOpenMenu(!openMenu);
     }
-    render() {
     return([
-        <div id = "header-menu" className = "hidden" key = {"header-menu"}>
+        <div id = "header-menu" className = {openMenu ? "animation" : "hidden"} key = {"header-menu"}>
             <div id = "contact-phone">
                 <div id = "project-link-container">
                     <div id = "src-code-container">
@@ -48,7 +44,7 @@ export default class HeaderPhone extends React.Component {
                     <img src = {logo} alt = "Hangman" id = "hangman-phone-icon" width = "128" height = "128" className = "phone-icon non-selectable"></img>
                     <div id = "header-phone-text">Hangman</div>
                 </div>
-                <div id = "menu-toggle" onClick = {this.MenuAnimation}>
+                <div id = "menu-toggle" onClick = {MenuAnimation} className = {openMenu ? "open" : ""}>
                     <div id = "hamburger">
                         <span></span>
                         <span></span>
@@ -62,5 +58,4 @@ export default class HeaderPhone extends React.Component {
             </div>
         </header>
     ])
-    }
 }
