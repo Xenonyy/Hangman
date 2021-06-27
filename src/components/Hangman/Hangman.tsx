@@ -2,8 +2,8 @@ import React, { MouseEvent, ReactElement } from 'react';
 import './Hangman.css'
 import word from '../Words/Words';
 import arrow from '../Images/right-arrow.png';
-import Win from '../Results/Win';
-import Lose from '../Results/Lose';
+import Win from '../Results/Win.tsx';
+import Lose from '../Results/Lose.tsx';
 
 import { ReactComponent as State0 } from '../Images/0.svg';
 import { ReactComponent as State1 } from '../Images/1.svg';
@@ -14,7 +14,7 @@ import { ReactComponent as State5 } from '../Images/5.svg';
 import { ReactComponent as State6 } from '../Images/6.svg';
 import { ReactComponent as CompleteHangman } from '../Images/CompleteHangman.svg';
 import { Footer } from '../Footer/Footer';
-import ConditionalHeader, { isMobile } from '../Header/ConditionalHeader';
+import ConditionalHeader, { isMobile } from '../Header/ConditionalHeader.tsx';
 
 type myState = {
     mistakes: number,
