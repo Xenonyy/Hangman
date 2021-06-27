@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent, ReactElement } from 'react';
 import './Hangman.css'
 import word from '../Words/Words';
 import arrow from '../Images/right-arrow.png';
@@ -16,24 +16,27 @@ import { ReactComponent as CompleteHangman } from '../Images/CompleteHangman.svg
 import { Footer } from '../Footer/Footer';
 import ConditionalHeader, { isMobile } from '../Header/ConditionalHeader';
 
-export default class Hangman extends React.Component {
-    static defaultProps = {
-        maxMistakes: 6
-    }
-    constructor(props) {
-        super(props);
-        this.state = {
-            mistakes: 0,
-            answer: word.getRandom(),
-            guess: new Set([]),
-            showGame: false,
-            showIns: false
-        }
+type myState = {
+    mistakes: number,
+    guess: Set<string>,
+    answer: string,
+    showGame: boolean,
+    showIns: boolean,
+    disabled: boolean
+}
+export default class Hangman extends React.Component<{}, myState> {
+    state: myState = {
+        mistakes: 0,
+        guess: new Set([]),
+        answer: word.getRandom(),
+        showGame: false,
+        showIns: false,
+        disabled: false
     }
 
     // Handle the correctness of the guess and update state accordingly.
-    handleGuess = (e) => {
-        let letter = e.target.value;
+    handleGuess = (e: React.MouseEvent<HTMLButtonElement>) => {
+        const letter: string = e.currentTarget.value;
         this.setState({
             guess: this.state.guess.add(letter),
             mistakes: this.state.mistakes + (this.state.answer.includes(letter) ? 0 : 1)
@@ -41,12 +44,12 @@ export default class Hangman extends React.Component {
     }
 
     // Reveal the character if it was guessed correctly.
-    guessedLetter = () => this.state.answer.split("").map(letter => this.state.guess.has(letter) ? letter : " _ ");
+    guessedLetter = (): string[] => this.state.answer.split("").map((letter: string) => this.state.guess.has(letter) ? letter : " _ ");
 
     // Create a button for each letter of the English alphabet. Disable buttons which have had been clicked.
-    generateKeyboard = () => {
-        let alphabet = [...Array(26).keys()].map(i => String.fromCharCode(i + 97));
-        return alphabet.map(letter => 
+    generateKeyboard = (): ReactElement[] => {
+        let alphabet: string[] = [...Array(26).keys()].map(i => String.fromCharCode(i + 97));
+        return alphabet.map((letter: string) => 
             <button 
             key={letter} 
             value={letter} 
@@ -78,25 +81,25 @@ export default class Hangman extends React.Component {
     }
 
     // Make the user able to select the length of the word and update state.
-    handleWordLength = (e) => {
-        let length = parseInt(e.target.value);
-        let buttonLengthWords = word.getFullArr.filter(word => word.length === length);
-        const findRandom = () => buttonLengthWords[Math.floor(Math.random() * buttonLengthWords.length)];
+    handleWordLength = (e: React.MouseEvent<HTMLButtonElement>) => {
+        let length: number = parseInt(e.currentTarget.value);
+        let buttonLengthWords: string[] = word.getFullArr.filter((word: string) => word.length === length);
+        const findRandom = (): string => buttonLengthWords[Math.floor(Math.random() * buttonLengthWords.length)];
         this.setState({
             answer: findRandom()
         });
     }
 
     // Generate the buttons based on the min and max length of the words array.
-    generateWordLength = () => {
-        let length = [...Array(7).keys()];
-        return length.map(i =>
+    generateWordLength = (): ReactElement[] => {
+        let length: number[] = [...Array(7).keys()];
+        return length.map((i: number) =>
             <button 
-            key={word.getMinLenght + i} 
-            value={word.getMinLenght + i} 
+            key={word.getMinLength + i} 
+            value={word.getMinLength + i} 
             id={`btn-${i}`} 
             onClick={this.handleWordLength}
-            >{word.getMinLenght + i}</button>
+            >{word.getMinLength + i}</button>
         )
     }
 
@@ -122,15 +125,17 @@ export default class Hangman extends React.Component {
     }
 
     // Set the state for the keyboard
-    disableKeyboard = () => document.querySelector("#keyboard").style.pointerEvents = "none"; // document.querySelectorAll(".virtual-buttons").forEach(e => e.setAttribute("disabled", ""));
-    enableKeyboard = () => document.querySelector("#keyboard").style.pointerEvents = "all";
+    disableKeyboard = (): boolean => this.state.disabled = true;
+    enableKeyboard = (): boolean => this.state.disabled = false;
 
     render() {
-        // Calculate the outcome of the game and display the state accordingly.
-        const correctAnswer = this.guessedLetter().join("") === this.state.answer;
-        const gameOver = this.state.mistakes >= this.props.maxMistakes;
+        const maxMistkes: number = 6;
 
-        let result = `It's a ${this.state.answer.length} letter word`;
+        // Calculate the outcome of the game and display the state accordingly.
+        const correctAnswer: boolean = this.guessedLetter().join("") === this.state.answer;
+        const gameOver: boolean = this.state.mistakes >= maxMistkes;
+
+        let result: string | ReactElement = `It's a ${this.state.answer.length} letter word`;
         // "An" edge-case
         if (this.state.answer.length === 8 || this.state.answer.length === 11) result = `It's an ${this.state.answer.length} letter word`;
         if (correctAnswer) result = <Win />;
@@ -138,7 +143,7 @@ export default class Hangman extends React.Component {
         if (gameOver || correctAnswer) this.disableKeyboard();
 
         // Conditional rendering of hangman SVG components based on the number of mistakes made.
-        let hangmanState;
+        let hangmanState: ReactElement;
         switch (this.state.mistakes) {
             case 0: hangmanState = <State0 />; break;
             case 1: hangmanState = <State1 />; break;
@@ -151,7 +156,7 @@ export default class Hangman extends React.Component {
         }
 
         // Instructions page component
-        const Instructions = () => (
+        const Instructions = (): ReactElement => (
             <article className="hangman-container" id="hangman-instructions">
                 <h1 className="hangman-title">The Hangman</h1>
                 <div id="instructions-container">
@@ -170,7 +175,7 @@ export default class Hangman extends React.Component {
         return(
             <main id="wrapper">
                 <ConditionalHeader/>
-                { this.state.showIns ? null :
+                { !this.state.showIns &&
                     <section id="instructions" >
                         { !isMobile ? <p>Instructions</p> : null}
                         <img src={arrow} alt="Arrow" id="right-arrow" onClick={this.showInstructions}/>
@@ -182,8 +187,8 @@ export default class Hangman extends React.Component {
                             <h1 className="hangman-title">The Hangman</h1>
                             <span>{result}</span>
                             <p id="answer-word" style={{fontSize: "1.2rem", color: "mediumspringgreen"}}>{gameOver ? `Correct word: ${this.state.answer}` : this.guessedLetter()}</p>
-                            <p id="keyboard">{this.generateKeyboard()}</p>
-                            <p id="mistakes">Number of <b>wrong</b> guesses: {this.state.mistakes} (out of {this.props.maxMistakes})</p>
+                            <p id="keyboard" className={this.state.disabled ? "disabled" : ""}>{this.generateKeyboard()}</p>
+                            <p id="mistakes">Number of <b>wrong</b> guesses: {this.state.mistakes} (out of {maxMistkes})</p>
                             <div id="button-container">
                                 <button className="game-btn" onClick={this.endGame}>End Game</button>
                                 <button className="game-btn" id ="new-game-btn" onClick={this.resetGame}>Start New Game</button>

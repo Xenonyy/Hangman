@@ -1,4 +1,4 @@
-const words = [
+const words: string[] = [
     "activity",
     "actually",
     "although",
@@ -162,14 +162,18 @@ const words = [
     "responsibility"
 ];
 
+type wordType = {
+    getRandom: string | any,
+    getMaxLength: number,
+    getMinLength: number,
+    getFullArr: string[]
+}
 // Pick a random word
-const word = {
+const word: wordType = {
     getRandom: () => words[Math.floor(Math.random() * words.length)],
-    getMaxLenght: Math.max(...(words.map(el => el.length))),
-    getMinLenght: Math.min(...(words.map(el => el.length))),
+    getMaxLength: Math.max(...(words.map(el => el.length))),
+    getMinLength: Math.min(...(words.map(el => el.length))),
     getFullArr: words
 }
-
-console.log(word.getMaxLenght, word.getMinLenght)
 
 export default word;
