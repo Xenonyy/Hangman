@@ -1,6 +1,6 @@
 # About this project
 
-A game made in React, where you can play the classic Hangman.\
+A game made in React and TypeScript, where you can play the classic Hangman.\
 Responsive design and custom functionality and layout for mobile devices.
 
 Main features:
@@ -15,9 +15,9 @@ View this project at: https://reacthangman.netlify.app/
 
 # Technologies used
 
-* React - Front-end JavaScript library
-* JavaScript (ES6) - Script language used to implement interactivity within a website
-* CSS3 - Cascading Style Sheets (Used for designing a website)
+* React - Front-End JavaScript Library
+* TypeScript - Strict Syntactical Superset of JavaScript
+* CSS3 - Cascading Style Sheets
 * Git - Version Control System
 
 # Getting Started
@@ -49,3 +49,4 @@ The build is minified and the filenames include the hashes.
 # Author
 
 * **Armand Gonda**
+* Website - [Xenonyy](http://xenonyy.github.io/)
