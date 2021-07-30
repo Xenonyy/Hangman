@@ -1,0 +1,17 @@
+{
+	"overrides": [
+			{
+					"files": ".prettierrc",
+					"options": {
+							"parser": "json"
+					}
+			}
+	],
+	"proseWrap": "always",
+	"trailingComma": "all",
+	"semi": true,
+	"singleQuote": true,
+	"arrowParens": "avoid",
+	"quoteProps": "consistent",
+	"jsxBracketSameLine": false
+}

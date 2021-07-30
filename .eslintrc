@@ -1,17 +1,54 @@
 {
-    "settings": {
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "createDefaultProgram": true
+  },
+  "settings": {
     "import/resolver": {
+      "typescript": {},
       "node": {
         "paths": ["src"],
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
-    },
-    "extends": [
-      "plugin:import/errors",
-      "plugin:import/warnings",
-      "plugin:import/typescript",
-      "plugin:import/react"
+    }
+  },
+  "globals": {
+    "React": "writable"
+  },
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "airbnb-typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "plugin:react-perf/recommended",
+    "eslint:recommended"
+  ],
+  "rules": {
+    "react/prop-types": "off",
+    "react/jsx-key": "error",
+    "import/exports-last": "error",
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "groups": [
+          ["builtin", "external"],
+          ["internal", "parent"],
+          ["sibling", "index"]
+        ]
+      }
     ],
-    "parser": "babel-eslint"
+    "newline-before-return": "error",
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "", "next": ["class", "function"] },
+      { "blankLine": "always", "prev": ["class", "function"], "next": "" },
+      { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" },
+      { "blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"] }
+    ],
   }
 }
