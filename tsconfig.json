@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "esnext",
+    "module": "ESNext",
     "lib": [
       "ES5",
       "DOM"
     ],
     "allowJs": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "declaration": true,
     "declarationMap": true,
     "outDir": "dist",
